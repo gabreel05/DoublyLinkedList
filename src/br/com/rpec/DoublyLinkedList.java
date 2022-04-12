@@ -1,5 +1,7 @@
 package br.com.rpec;
 
+import java.util.Objects;
+
 public class DoublyLinkedList {
     private Node first;
     private Node last;
@@ -52,23 +54,19 @@ public class DoublyLinkedList {
     }
 
     public void removeAtTheBeginning() {
-        if (this.totalOfElements == 0)
-            throw new IllegalArgumentException("Illegal position!");
+        if (this.totalOfElements == 0) throw new IllegalArgumentException("Illegal position!");
 
         this.first = this.first.getNext();
         this.first.setPrevious(this.last);
         this.last.setNext(this.first);
         this.totalOfElements--;
 
-        if (this.totalOfElements == 0)
-            this.last = null;
+        if (this.totalOfElements == 0) this.last = null;
     }
 
     public void removeAtTheEnd() {
-        if (this.totalOfElements == 0)
-            throw new IllegalArgumentException("Illegal position!");
-        else if (this.totalOfElements == 1)
-            removeAtTheBeginning();
+        if (this.totalOfElements == 0) throw new IllegalArgumentException("Illegal position!");
+        else if (this.totalOfElements == 1) removeAtTheBeginning();
         else {
             Node penultimate = this.last.getPrevious();
             penultimate.setNext(this.first);
@@ -79,12 +77,9 @@ public class DoublyLinkedList {
     }
 
     public void remove(Integer position) {
-        if (occupiedPosition(position))
-            throw new IllegalArgumentException("Illegal position!");
-        else if (position == 0)
-            removeAtTheBeginning();
-        else if (position == this.totalOfElements - 1)
-            removeAtTheEnd();
+        if (occupiedPosition(position)) throw new IllegalArgumentException("Illegal position!");
+        else if (position == 0) removeAtTheBeginning();
+        else if (position == this.totalOfElements - 1) removeAtTheEnd();
         else {
             Node removedNode = getNode(position);
             Node previous = removedNode.getPrevious();
@@ -102,8 +97,7 @@ public class DoublyLinkedList {
     }
 
     public Node getNode(Integer position) {
-        if (occupiedPosition(position))
-            throw new IllegalArgumentException("Illegal position!");
+        if (occupiedPosition(position)) throw new IllegalArgumentException("Illegal position!");
         Node actual = first;
         for (int i = 0; i < position; i++) {
             actual = actual.getNext();
@@ -120,7 +114,7 @@ public class DoublyLinkedList {
         Node actual = this.first;
 
         for (int i = 0; i < this.totalOfElements; i++) {
-            if (actual.getElement() == element) {
+            if (Objects.equals(actual.getElement(), element)) {
                 return true;
             }
 
@@ -132,8 +126,7 @@ public class DoublyLinkedList {
 
     @Override
     public String toString() {
-        if (size() == 0)
-            return "[]";
+        if (size() == 0) return "[]";
 
         Node actual = first;
 
