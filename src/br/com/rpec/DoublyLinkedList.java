@@ -21,9 +21,8 @@ public class DoublyLinkedList {
     }
 
     public void add(Integer element) {
-        if (this.totalOfElements == 0) {
-            addAtTheBeginning(element);
-        } else {
+        if (this.totalOfElements == 0) addAtTheBeginning(element);
+        else {
             Node newNode = new Node(element, this.first);
             this.last.setNext(newNode);
             newNode.setPrevious(this.last);
@@ -35,11 +34,9 @@ public class DoublyLinkedList {
     }
 
     public void add(Integer position, Integer element) {
-        if (this.totalOfElements == 0) {
-            addAtTheBeginning(element);
-        } else if (position == totalOfElements) {
-            add(element);
-        } else {
+        if (this.totalOfElements == 0) addAtTheBeginning(element);
+        else if (position == totalOfElements) add(element);
+        else {
             Node previous = getNode(position - 1);
 
             Node newNode = new Node(element, previous.getNext());
